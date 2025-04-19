@@ -1,16 +1,15 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import UserLayout from "./components/Layout/UserLayout.jsx";
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <h1 className={"text-3xl "}>helloo</h1>
-    </>
-  )
+const App = () => {
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<UserLayout/>}></Route>
+                {/*User Layout*/}
+                <Route>{/*Admin Layout*/}</Route>
+            </Routes>
+        </BrowserRouter>
+    )
 }
-
 export default App
