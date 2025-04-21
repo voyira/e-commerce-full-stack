@@ -21,7 +21,7 @@ const SearchBar = () => {
                         <input type="text"
                                placeholder={"Search"}
                                value={searchTerm}
-                               onClick={(e) => setSearchTerm(e.target.value)}
+                               onChange={(e) => setSearchTerm(e.target.value)}
                                className={"bg-gray-100 px-4 py-2 pl-2 pr-12 rounded-lg focus:outline-none w-full placeholder:text-gray-700"}
                         />
                         {/*{search icon}*/}
