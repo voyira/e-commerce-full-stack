@@ -14,7 +14,7 @@ const Footer = () => {
                     <p className={"text-gray-500 mb-4"}>
                         Be the first to hear about new products, exclusive events and online offers.
                     </p>
-                    <p className={"font-medium text-sm text-gray-800 mb-6"}>
+                    <p className={"text-gray-800 mb-6"}>
                         Sign up and get 10% off your first order.
                     </p>
                     <form className={"flex"}>
@@ -23,7 +23,7 @@ const Footer = () => {
                                className={"p-3 w-full text-sm border-t border-l border-b border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all"}
                                required/>
                         <button type={"submit"}
-                                className={"bg-blac text-white px-6 py-3 text-sm rounded-r-md hover:bg-gray-800 transition-all"}>Subscribe
+                                className={"bg-black text-white px-6 py-3 text-sm rounded-r-md hover:bg-gray-800 transition-all"}>Subscribe
                         </button>
                     </form>
                 </div>
@@ -80,15 +80,15 @@ const Footer = () => {
                 <div>
                     <h3 className={"text-lg text-gray-800 mb-4"}>Follow Us</h3>
                     <div className={"flex items-center space-x-4 mb-6"}>
-                        <a href="http://www.facebook.com" target={"_blank"} rel={"noopener noreferrer"}
+                        <a href="https://www.facebook.com" target={"_blank"} rel={"noopener noreferrer"}
                         className={"hover:text-gray-500"}>
                             <TbBrandMeta className={"h-5 w-5"}/>
                         </a>
-                        <a href="http://www.instagram.com" target={"_blank"} rel={"noopener noreferrer"}
+                        <a href="https://www.instagram.com" target={"_blank"} rel={"noopener noreferrer"}
                            className={"hover:text-gray-500"}>
                             <IoLogoInstagram className={"h-5 w-5"}/>
                         </a>
-                        <a href="http://www.x.com" target={"_blank"} rel={"noopener noreferrer"}
+                        <a href="https://www.x.com" target={"_blank"} rel={"noopener noreferrer"}
                            className={"hover:text-gray-500"}>
                             <RiTwitterXLine className={"h-5 w-5"}/>
                         </a>

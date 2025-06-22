@@ -9,7 +9,7 @@ const CartDrawer = ({drawerOpen ,toggleCartDrawer}) => {
         >
             {/*{Close Button}*/}
             <div className={"flex justify-end p-4"}>
-                <button>
+                <button onClick={toggleCartDrawer}>
                     <IoMdClose  className={"h-6 w-6 text-gray-600"}/>
                 </button>
             </div>
