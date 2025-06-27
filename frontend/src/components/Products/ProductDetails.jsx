@@ -11,11 +11,12 @@ const selectedProduct = {
     material: "Leather",
     sizes: ["S", "M", "L", "XL"],
     colors: ["Red", "Blue"],
-    images: [{
-        url: "https://picsum.photos/500/500?random=1", altText: "Stylish Jacket 1",
-    }, {
-        url: "https://picsum.photos/500/500?random=2", altText: "Stylish Jacket 2",
-    },
+    images: [
+        {
+            url: "https://picsum.photos/500/500?random=1", altText: "Stylish Jacket 1",
+        }, {
+            url: "https://picsum.photos/500/500?random=2", altText: "Stylish Jacket 2",
+        },
     ]
 }
 const similarProducts = [
@@ -42,8 +43,7 @@ const similarProducts = [
         name: "Product 4",
         price: 120,
         images: [{url: "https://picsum.photos/500/500?random=6"}]
-    },
-
+    }
 ]
 const ProductDetails = () => {
     const [mainImage, setMainImage] = useState("");
@@ -98,8 +98,9 @@ const ProductDetails = () => {
                         <div className={"mb-4"}>
                             <img
                                 src={mainImage}
-                                alt="Main Product"
-                                className={"w-full h-auto object-cover rounded-lg"}/>
+                                alt={"Main Product"}
+                                className={"w-full h-auto object-cover rounded-lg"}
+                            />
                         </div>
                     </div>
                     {/*Mobile Thumbnail*/}
