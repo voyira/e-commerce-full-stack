@@ -25,7 +25,7 @@ const Navbar = () => {
                 </div>
                 {/*center- navigation Links*/}
                 <div className={"hidden md:flex space-x-6"}>
-                    <Link to={"#"}
+                    <Link to={"/collections/all"}
                           className={"text-gray-700 hover:text-block text-sm font-medium uppercase"}>
                         Men
                     </Link>
