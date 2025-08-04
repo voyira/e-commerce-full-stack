@@ -2,6 +2,7 @@ import {useState} from "react";
 import {FaBars} from "react-icons/fa";
 import AdminSidebar from "./AdminSidebar.jsx";
 import {Outlet} from "react-router-dom";
+import AdminHomePage from "../../pages/AdminHomePage.jsx";
 
 const AdminLayout = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -32,7 +33,6 @@ const AdminLayout = () => {
             >
                 <AdminSidebar/>
             </div>
-            <AdminHomePage/>
             {/* main content */}
             <div className="flex-grow p-6 overflow-auto">
                 <Outlet/>
