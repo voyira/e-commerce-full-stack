@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User.js");
 
 //Middleware to protect routes
-const protect = async (req, resizeBy, next) => {
+const protect = async (req, res, next) => {
     let token;
     if (req.headers.authorization &&
         req.headers.authorization.startsWith("Bearer")
@@ -14,7 +14,7 @@ const protect = async (req, resizeBy, next) => {
             next()
         } catch (error) {
             console.error("Token verification failed.", error);
-            resizeBy.status(401).json({message: "Not authorized, token failed"})
+            res.status(401).json({message: "Not authorized, token failed"})
         }
     } else {
         res.status(401).json({message: "Not authorized , no token provided"})
