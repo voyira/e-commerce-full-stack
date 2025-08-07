@@ -48,7 +48,7 @@ router.put("/:id/pay", protect, async (req, res) => {
         if (checkout.user.toString() !== req.user._id.toString()) {
             return res.status(403).json({ message: "Unauthorized" });
         }
-        // check ispaid or not
+        // check isPaid or not
         if (checkout.isPaid) {
             return res.status(400).json({ message: "Already paid" });
         }
