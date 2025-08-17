@@ -95,6 +95,7 @@ router.put("/", async (req, res) => {
             (p) => p.productId.toString() === productId && p.size === size && p.color === color
         );
         if (productIndex > -1) {
+            //Update quantity
             if (quantity > 0) {
                 cart.products[productIndex].quantity = quantity;
             } else {
