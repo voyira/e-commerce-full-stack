@@ -1,20 +1,21 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 
+const getAuthHeaders = () => ({
+    Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+});
 //Async thunk to create a checkout session
 export const createCheckout = createAsyncThunk(
     "checkout/createCheckout",
     async (checkoutData, {rejectWithValue}) => {
         try {
-            const response = await axios.post(`$import.meta.env.VITE_BACKEND_URL}/api/checkout`,
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/checkout`,
                 checkoutData, {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-                    },
+                    headers: getAuthHeaders(),
                 });
             return response.data;
         } catch (error) {
-            return rejectWithValue(error.response.data);
+            return rejectWithValue(error.response?.data || { message: "Failed to create checkout session" });
         }
     }
 );
@@ -22,10 +23,18 @@ const checkoutSlice = createSlice({
     name: "checkout",
     initialState: {
         checkout: null,
-        loading: null,
+        loading: false,
         error: null,
     },
-    reducers: {},
+    reducers: {
+        clearError: (state) => {
+            state.error = null;
+        },
+        clearCheckout: (state) => {
+            state.checkout = null;
+            state.error = null;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(createCheckout.pending, (state) => {
@@ -38,9 +47,10 @@ const checkoutSlice = createSlice({
             })
             .addCase(createCheckout.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.payload.message;
+                state.error = action.payload?.message || "Failed to create checkout session";
             });
     },
 });
 
+export const { clearError, clearCheckout } = checkoutSlice.actions;
 export default checkoutSlice.reducer;
