@@ -1,15 +1,24 @@
-import React, {useState} from 'react';
-import {Link} from "../../src/assets/login.webp"
+import {useState} from 'react';
+import {Link} from "react-router-dom"
+import login from "../assets/login.webp";
+import {useDispatch, useSelector} from "react-redux";
+import {loginUser} from "../redux/slices/authSlice.js";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
+    const {user, guestId, loading} = useSelector((state) => state.auth);
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(loginUser({ email, password }));
+    }
     return (
         <div className={"flex"}>
             <div className={"w-full md:w-1/2 flex flex-col justify-center items-center p-8 md:p-12"}>
-                <form
-                    className={"w-full max-w-md bg-white p-8 rounded-lg border shadow-sm"}
+                <form onSubmit={handleSubmit}
+                      className={"w-full max-w-md bg-white p-8 rounded-lg border shadow-sm"}
                 >
                     <div className={"flex justify-center mb-6"}>
                         <h2 className="text-xl font-medium">ROCKSET</h2>
@@ -30,6 +39,7 @@ const Login = () => {
                             placeholder="Enter your email address"
                         />
                     </div>
+
                     <div className={"m-4"}>
                         <label
                             className={"block text-sm font-semibold mb-2"}>Password</label>
@@ -46,7 +56,7 @@ const Login = () => {
                         className={"w-full bg-black text-white p-2 rounded-lg font-semibold hover:bg-gray-800 transition"}
                     >
                         {" "}
-                        { loading ? "Loading..." : "Sign In"}
+                        {loading ? "Loading..." : "Sign In"}
                     </button>
                     <p className={"mt-6 text-center text-sm"}>
                         Don't have an account?
@@ -69,5 +79,4 @@ const Login = () => {
         </div>
     );
 };
-
 export default Login;
