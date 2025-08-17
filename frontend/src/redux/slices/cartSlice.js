@@ -1,6 +1,9 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios"
 
+const getAuthHeaders = () => ({
+    Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+});
 //Helper function to load cart from localStorage
 const loadCartFromStorage = () => {
     const storedCart = localStorage.getItem("cart");
@@ -23,8 +26,7 @@ export const fetchCart = createAsyncThunk(
             });
             return response.data;
         } catch (error) {
-            console.log(error);
-            return rejectWithValue(error.response.data);
+            return rejectWithValue(error.response?.data || { message: "Failed to fetch cart" });
         }
     }
 );
@@ -46,7 +48,7 @@ export const addToCart = createAsyncThunk(
             });
             return response.data;
         } catch (error) {
-            return rejectWithValue(error.response.data);
+            return rejectWithValue(error.response?.data || { message: "Failed to add to cart" });
         }
     }
 );
@@ -69,7 +71,7 @@ export const updateCartItemQuantity = createAsyncThunk(
                 });
             return response.data;
         } catch (error) {
-            return rejectWithValue(error.response.data);
+            return rejectWithValue(error.response?.data || { message: "Failed to update item quantity" });
         }
     }
 );
@@ -91,7 +93,7 @@ export const removeFromCart = createAsyncThunk(
             });
             return response.data;
         } catch (error) {
-            return rejectWithValue(error.response.data);
+            return rejectWithValue(error.response?.data || { message: "Failed to remove item" });
         }
     }
 );
@@ -104,18 +106,15 @@ export const mergeCart = createAsyncThunk(
                 `${import.meta.env.VITE_BACKEND_URL}/api/cart/merge`,
                 {guestId, user},
                 {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-                    },
+                    headers: getAuthHeaders(),
                 }
             );
             return response.data;
         } catch (error) {
-            return rejectWithValue(error.response.data);
+            return rejectWithValue(error.response?.data || { message: "Failed to merge cart" });
         }
     }
 );
-
 const cartSlice = createSlice({
     name: "cart",
     initialState: {
@@ -127,6 +126,9 @@ const cartSlice = createSlice({
         clearCart: (state) => {
             state.cart = {products: []};
             localStorage.removeItem("cart");
+        },
+        clearError: (state) => {
+            state.error = null;
         },
     },
     extraReducers: (builder) => {
@@ -142,7 +144,7 @@ const cartSlice = createSlice({
             })
             .addCase(fetchCart.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error.message || "Failed to fetch cart";
+                state.error = action.payload?.message || "Failed to fetch cart";
             })
             .addCase(addToCart.pending, (state) => {
                 state.loading = true;
@@ -168,8 +170,7 @@ const cartSlice = createSlice({
             })
             .addCase(updateCartItemQuantity.rejected, (state, action) => {
                 state.loading = false;
-                state.error =
-                    action.payload?.message || "Failed to update item quantity";
+                state.error = action.payload?.message || "Failed to update item quantity";
             })
             .addCase(removeFromCart.pending, (state) => {
                 state.loading = true;
@@ -199,5 +200,6 @@ const cartSlice = createSlice({
             });
     },
 });
-export const {clearCart} = cartSlice.actions;
+
+export const {clearCart, clearError} = cartSlice.actions;
 export default cartSlice.reducer;
