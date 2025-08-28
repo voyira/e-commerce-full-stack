@@ -13,7 +13,9 @@ const ProductDetails = ({productId}) => {
         (state) => state.products
     );
     const {user, guestId} = useSelector((state => state.auth))
-    const [mainImage, setMainImage] = useState("");
+    const [mainImage, setMainImage] = useState(
+        "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png?20210521171500"
+    );
     const [selectedSize, setSelectedSize] = useState("");
     const [selectedColor, setSelectedColor] = useState("");
     const [quantity, setQuantity] = useState(1);
