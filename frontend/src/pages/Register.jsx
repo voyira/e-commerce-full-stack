@@ -10,13 +10,12 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
     const dispatch = useDispatch();
-
     const navigate = useNavigate();
     const location = useLocation();
     const {user, guestId, loading} = useSelector((state) => state.auth);
     const {cart} = useSelector((state) => state.cart);
 
-    // get the redirect parameter and check if it's checkout or something
+    //Get redirect parameter and check if it's checkout or something
     const redirect = new URLSearchParams(location.search).get("redirect") || "/";
     const isCheckoutRedirect = redirect.includes("checkout");
 
