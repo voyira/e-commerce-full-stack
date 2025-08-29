@@ -51,7 +51,7 @@ export const deleteProduct = createAsyncThunk(
     "adminProducts/deleteProduct",
     async (id, {rejectWithValue}) => {
         try {
-            await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/admin/products/${id}`, {
+            await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`, {
                 headers: getAuthHeaders(),
             });
             return id;
