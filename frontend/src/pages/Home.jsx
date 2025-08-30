@@ -28,7 +28,7 @@ const Home = () => {
         const fetchBestSeller = async () => {
             try{
                 const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products/best-seller`);
-                setBestSellerProduct(response.data);
+                setBestSellerProduct(response.data[0]);
             }catch(error){
                 console.error(error);
             }
@@ -48,7 +48,6 @@ const Home = () => {
             ) : (
                 <p className="text-center">Loading best seller product...</p>
             )}
-            <ProductDetails/>
             <div className={"container mx-auto"}>
                 <h2 className={"text-3xl text-center font-bold mb-4"}>
                     Top Wears for Women
