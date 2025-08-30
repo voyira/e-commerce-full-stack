@@ -27,7 +27,7 @@ const CartContents = ({cart, userId, guestId}) => {
     return (
         <div>
             {
-                cartProducts.map((product, index) => (
+                cart?.products?.map((product, index) => (
                     <div key={index} className={"flex items-start justify-between py-4 border-b"}>
                         <div className={"flex items-start"}>
                             <img src={product.image} alt={product.name}
